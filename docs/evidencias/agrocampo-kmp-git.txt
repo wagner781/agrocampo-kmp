@@ -1,0 +1,13 @@
+* d9912fa test(android): comprobar registro en modo avion contra el servicio real
+* de1fb68 feat(presentacion): conectar pantallas Compose con ViewModel y Koin
+*   d0953d9 Merge pull request #5 from wagner781/feature/sesion-y-offline
+|\  
+| * 1534a5a test(offline): verificar cola errores y orden con SQLite en memoria
+| * 93ab9e9 feat(offline): guardar sesion cifrada y cola durable de labores
+|/  
+*   0048c68 Merge pull request #4 from wagner781/feature/datos-locales
+|\  
+| * 8f15c61 fix(local): ajustar insercion y lectura escalar de SQLDelight
+| * f4537b1 feat(datos): definir dominio DTO y persistencia SQLDelight
+|/  
+* 528060a chore: iniciar modulos KMP y aplicacion Android compilables

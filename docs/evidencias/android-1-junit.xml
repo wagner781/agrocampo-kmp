@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pe.upeu.agrosierra.FlujoRealTest" tests="1" failures="0" errors="0" skipped="0" time="25.51" timestamp="2026-10-28T17:59:17" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_10a(AVD) - 17" />
+    <property name="flavor" value="" />
+    <property name="project" value=":androidApp" />
+  </properties>
+  <testcase name="loginRegistroOfflineYSincronizacionReal" classname="pe.upeu.agrosierra.FlujoRealTest" time="23.392" />
+</testsuite>

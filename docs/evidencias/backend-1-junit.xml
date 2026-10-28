@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pe.upeu.agrosierra.CampoTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-28T17:42:13.491Z" hostname="LAPTOP-D2ECFIJB" time="2.433">
+  <properties />
+  <testcase name="campania cerrada y dosis excesiva se rechazan()" classname="pe.upeu.agrosierra.CampoTest" time="1.325" />
+  <testcase name="crud devuelve 201 200 y 204 e idempotencia evita duplicar()" classname="pe.upeu.agrosierra.CampoTest" time="0.206" />
+  <testcase name="administrador no crea y tecnico no elimina ni cierra()" classname="pe.upeu.agrosierra.CampoTest" time="0.231" />
+  <testcase name="semilla tiene ocho lotes veinte labores y paginacion()" classname="pe.upeu.agrosierra.CampoTest" time="0.181" />
+  <testcase name="tecnico solo edita propias dentro de veinticuatro horas()" classname="pe.upeu.agrosierra.CampoTest" time="0.358" />
+  <testcase name="cierre exige cosecha y permite lote que la tiene()" classname="pe.upeu.agrosierra.CampoTest" time="0.125" />
+  </testsuite>

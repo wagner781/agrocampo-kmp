@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pe.upeu.agrosierra.OfflineTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-28T17:49:51.064Z" hostname="LAPTOP-D2ECFIJB" time="1.148">
+  <properties />
+  <testcase name="conversionDtoConservaModelo[jvm]" classname="pe.upeu.agrosierra.OfflineTest" time="0.067" />
+  <testcase name="diferencia401Y403[jvm]" classname="pe.upeu.agrosierra.OfflineTest" time="0.654" />
+  <testcase name="error400TransportaCampos[jvm]" classname="pe.upeu.agrosierra.OfflineTest" time="0.043" />
+  <testcase name="registroSinConexionPersisteNegativoYObservable[jvm]" classname="pe.upeu.agrosierra.OfflineTest" time="0.312" />
+  <testcase name="sincronizacionSubeAntesDeBajarYReemplazaSinDuplicar[jvm]" classname="pe.upeu.agrosierra.OfflineTest" time="0.07" />
+  </testsuite>

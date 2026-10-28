@@ -32,3 +32,40 @@ y no acredita desarrollo durante sesiones anteriores.
 La solicitud de cambio queda pendiente de asignación del docente. No se
 simulan evidencias del emulador ni resultados de evaluación.
 
+## Arquitectura, contrato y decisiones
+
+`domain` contiene modelos, interfaces y casos de uso; `data` contiene DTO/Ktor,
+SQLDelight y repositorios offline; `presentation` contiene ViewModel/StateFlow y
+Compose; `di` declara módulos Koin. Android implementa los contratos de plataforma.
+[Guía de defensa y recorrido del código](docs/DEFENSA.md).
+
+API: rutas `/auth/login`, `/usuarios/me`, `/lotes`, `/lotes/{id}`,
+`/lotes/{id}/labores`, `/labores`, `/labores/{id}` y
+`/lotes/{id}/cerrar-campania`. Los listados consumen el envoltorio `contenido`,
+`pagina`, `tamanio`, `totalElementos`, `totalPaginas`, `ultima` y todas las páginas.
+El dominio conserva los tipos exigidos en el PDF.
+
+Usuarios del backend: `tecnico1`, `jefe1`, `admin`; contraseña de demostración
+`Agro2026*`. Técnico lee/crea/edita propias en 24 h; jefe además elimina y cierra;
+administrador lee y gestiona usuarios según su privilegio. La seguridad definitiva
+siempre vive en el backend. La app no contiene datos de lotes ni labores semilla.
+
+El token se cifra con AndroidKeyStore y AES-GCM. La interfaz observa SQLDelight.
+Los cambios se guardan con pendiente y cola durable; sincronizar sube antes de
+bajar y usa idempotencia para resolver reintentos. Consultar la guía para el
+tratamiento de errores, cuentas y conflictos.
+
+Pruebas comunes ejecutables: `./gradlew.bat :shared:jvmTest`.
+La prueba Android real necesita emulador limpio y AgroAPI en el puerto 8080:
+`./gradlew.bat :androidApp:connectedDebugAndroidTest`.
+
+## Evidencias verificadas
+
+[PDF con capturas reales, respuestas HTTP y grafo Git](docs/evidencias/AgroSierra-evidencias.pdf).
+La carpeta `docs/evidencias` incluye los PNG originales, resúmenes JUnit XML y
+JSON de las comprobaciones contra el servidor. `sincronizacion-real.json`
+confirma una única fila positiva para la última operación instrumentada.
+Los resultados son de una ejecución real y no sustituyen la defensa.
+El script `docs/generar_evidencias.py` vuelve a componer el PDF con reportlab y
+Pillow a partir de los informes/capturas existentes; no inventa resultados.
+
