@@ -18,7 +18,7 @@ kotlin {
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.9.4")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
             implementation("io.ktor:ktor-client-core:3.3.0")
             implementation("io.ktor:ktor-client-content-negotiation:3.3.0")
             implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
@@ -40,4 +40,5 @@ android { namespace = "pe.upeu.agrosierra.shared"; compileSdk = 36
     compileOptions { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
 }
 sqldelight { databases { create("AgroDb") { packageName.set("pe.upeu.agrosierra.db") } } }
+
 

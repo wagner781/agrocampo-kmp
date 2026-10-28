@@ -14,7 +14,7 @@ CREATE TABLE meta (clave TEXT NOT NULL PRIMARY KEY, valor TEXT NOT NULL);
 observarLotes:
 SELECT * FROM lote WHERE (nombre LIKE ? OR codigo LIKE ?) AND (? = '' OR valle = ?) ORDER BY codigo;
 observarLaboresPorLote:
-SELECT * FROM labor WHERE loteId = ? ORDER BY fecha DESC, id DESC;
+SELECT * FROM labor WHERE loteId = ? AND NOT EXISTS (SELECT 1 FROM cola WHERE cola.laborId=labor.id AND cola.operacion='DELETE') ORDER BY fecha DESC, id DESC;
 siguienteIdLocal:
 SELECT COALESCE(MIN(id), 0) AS MIN FROM labor;
 guardarLote:
@@ -43,5 +43,7 @@ guardarMeta:
 INSERT OR REPLACE INTO meta VALUES (?, ?);
 ultimaSync:
 SELECT valor FROM meta WHERE clave='ultimaSync';
+propietario:
+SELECT valor FROM meta WHERE clave='propietario';
 eliminarRemotasLote:
 DELETE FROM labor WHERE loteId = ? AND pendiente = 0;
