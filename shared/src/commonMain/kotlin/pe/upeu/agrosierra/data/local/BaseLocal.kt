@@ -13,7 +13,7 @@ class BaseLocal(val db: AgroDb) {
         .map { rows -> rows.map { Labor(it.id,it.loteId,TipoLabor.valueOf(it.tipo),it.fecha,it.responsable,it.cantidad,it.observacion,it.pendiente!=0L) } }
     fun guardar(l: Lote) = q.guardarLote(l.id,l.codigo,l.nombre,l.hectareas,l.cultivo,l.valle,if(l.campaniaCerrada) 1L else 0L,l.dosisMaximaPorHectarea)
     fun guardar(l: Labor) = q.guardarLabor(l.id,l.loteId,l.tipo.name,l.fecha,l.responsable,l.cantidad,l.observacion,if(l.pendiente) 1L else 0L)
-    fun siguienteId() = minOf(-1L,(q.siguienteIdLocal().executeAsOne().MIN ?: 0L)-1)
+    fun siguienteId() = minOf(-1L,q.siguienteIdLocal().executeAsOne()-1)
     fun limpiar() = db.transaction { q.borrarCola(); q.borrarLabores(); q.borrarLotes(); q.borrarMeta() }
     fun ultimaSync(): String = q.ultimaSync().executeAsOneOrNull() ?: "Nunca"
 }

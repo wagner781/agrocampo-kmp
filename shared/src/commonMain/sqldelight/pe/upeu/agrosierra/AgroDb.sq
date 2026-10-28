@@ -20,7 +20,7 @@ SELECT COALESCE(MIN(id), 0) AS MIN FROM labor;
 guardarLote:
 INSERT OR REPLACE INTO lote VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 guardarLabor:
-INSERT OR REPLACE INTO labor VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO labor VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 encolar:
 INSERT OR REPLACE INTO cola VALUES (?, ?, ?);
 pendientes:
