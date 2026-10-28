@@ -1,0 +1,17 @@
+*   b7329a4 Merge pull request #7 from wagner781/develop
+|\  
+| *   ab86a8a Merge pull request #6 from wagner781/feature/contrato-y-defensa
+| |\  
+| | * d805fff docs(api): explicar seguridad reglas y pruebas reproducibles
+| |/  
+| *   0ac76f8 Merge pull request #5 from wagner781/feature/crud-campo
+| |\  
+| | * 404684c test(campo): comprobar reglas privilegios paginacion y CRUD
+| | * 3ccc35b feat(campo): persistir lotes y labores con reglas transaccionales
+| |/  
+| * 4713c5c Merge pull request #4 from wagner781/feature/seguridad-jwt
+|/| 
+| * 05309d7 test(seguridad): verificar firma, caducidad y credenciales
+| * 94d1ffc feat(seguridad): modelar usuarios y emitir JWT firmado con privilegios
+|/  
+* 8a79535 chore: iniciar estructura compilable de Spring Boot

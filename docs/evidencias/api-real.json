@@ -1,0 +1,129 @@
+{
+  "ejecutadoEn": "2026-10-28T17:53:50.875056+00:00",
+  "resultados": [
+    {
+      "metodo": "GET",
+      "ruta": "/lotes",
+      "status": 401,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.605338600Z",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "Sesion ausente, invalida o vencida",
+        "path": "/api/v1/lotes",
+        "validationErrors": {}
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/auth/login",
+      "status": 401,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.809967100Z",
+        "status": 401,
+        "error": "Unauthorized",
+        "message": "Credenciales incorrectas",
+        "path": "/api/v1/auth/login",
+        "validationErrors": {}
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/lotes?pagina=0&tamanio=3",
+      "status": 200,
+      "cuerpo": {
+        "contenido": [
+          {
+            "id": 1,
+            "codigo": "LOT-001",
+            "nombre": "Chacra 1",
+            "hectareas": 3.0,
+            "cultivo": "Papa",
+            "valle": "Mantaro",
+            "campaniaCerrada": false,
+            "dosisMaximaPorHectarea": 3.0
+          },
+          {
+            "id": 2,
+            "codigo": "LOT-002",
+            "nombre": "Chacra 2",
+            "hectareas": 4.0,
+            "cultivo": "Maiz",
+            "valle": "Sagrado",
+            "campaniaCerrada": false,
+            "dosisMaximaPorHectarea": 3.0
+          },
+          {
+            "id": 3,
+            "codigo": "LOT-003",
+            "nombre": "Chacra 3",
+            "hectareas": 5.0,
+            "cultivo": "Papa",
+            "valle": "Colca",
+            "campaniaCerrada": false,
+            "dosisMaximaPorHectarea": 3.0
+          }
+        ],
+        "pagina": 0,
+        "tamanio": 3,
+        "totalElementos": 8,
+        "totalPaginas": 3,
+        "ultima": false
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/labores",
+      "status": 403,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.837007800Z",
+        "status": 403,
+        "error": "Forbidden",
+        "message": "No tiene el privilegio necesario",
+        "path": "/api/v1/labores",
+        "validationErrors": {}
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/labores",
+      "status": 400,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.848519700Z",
+        "status": 400,
+        "error": "Bad Request",
+        "message": "Dosis maxima excedida (RN-04)",
+        "path": "/api/v1/labores",
+        "validationErrors": {
+          "cantidad": "Maximo permitido: 12.0"
+        }
+      }
+    },
+    {
+      "metodo": "GET",
+      "ruta": "/lotes/999",
+      "status": 404,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.858534600Z",
+        "status": 404,
+        "error": "Not Found",
+        "message": "Lote no encontrado",
+        "path": "/api/v1/lotes/999",
+        "validationErrors": {}
+      }
+    },
+    {
+      "metodo": "POST",
+      "ruta": "/lotes/2/cerrar-campania",
+      "status": 409,
+      "cuerpo": {
+        "timestamp": "2026-10-28T17:53:50.874060500Z",
+        "status": 409,
+        "error": "Conflict",
+        "message": "Se requiere al menos una Cosecha para cerrar (RN-03)",
+        "path": "/api/v1/lotes/2/cerrar-campania",
+        "validationErrors": {}
+      }
+    }
+  ]
+}

@@ -30,11 +30,13 @@ class CampoViewModel(private val repo: CampoRepository,private val sesiones: Ses
         viewModelScope.launch {
             sesiones.sesion.collect { s ->
                 venceJob?.cancel()
-                state.update { it.copy(sesion=s,lote=null,perfil=false,formulario=null,campos=emptyMap(),mensaje="",error=null) }
+                val cambioUsuario=state.value.sesion?.usuario!=s?.usuario
+                state.update { if(cambioUsuario) it.copy(sesion=s,lote=null,perfil=false,formulario=null,campos=emptyMap(),mensaje="",error=null)
+                    else it.copy(sesion=s) }
                 if(s!=null) {
                     observarLista()
                     venceJob=viewModelScope.launch { delay(((s.venceEn-Clock.System.now().epochSeconds)*1000).coerceAtLeast(0)); sesiones.salir() }
-                    sync()
+                    if(cambioUsuario) sync()
                 } else { detalleJob?.cancel() }
             }
         }
@@ -45,7 +47,7 @@ class CampoViewModel(private val repo: CampoRepository,private val sesiones: Ses
         listaJob=viewModelScope.launch(Dispatchers.Default) {
             repo.observarLotes(p.buscar,p.valle).catch { e -> error(e) }.collect { filas ->
                 state.update { it.copy(lotes=filas,estado=if(filas.isEmpty()) UiState.Vacio else UiState.Contenido,
-                    lote=it.lote?.let { l -> filas.find { f -> f.id==l.id } ?: l }) }
+                    lote=it.lote?.let { l -> filas.find { f -> f.id==l.id } ?: l },ultimaSync=repo.ultimaSync()) }
             }
         }
     }
@@ -108,6 +110,7 @@ class CampoViewModel(private val repo: CampoRepository,private val sesiones: Ses
     }
     private fun error(e: Throwable) {
         val error=e as? ErrorApi ?: ErrorApi.Protocolo()
-        state.update { it.copy(mensaje=error.message,error=error,campos=(error as? ErrorApi.Validacion)?.campos ?: emptyMap()) }
+        state.update { it.copy(mensaje=error.message,error=error,campos=(error as? ErrorApi.Validacion)?.campos ?: emptyMap(),
+            estado=if(it.lotes.isEmpty()) UiState.Error(error) else it.estado) }
     }
 }
