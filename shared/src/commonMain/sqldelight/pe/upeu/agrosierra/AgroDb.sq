@@ -1,0 +1,47 @@
+CREATE TABLE lote (
+ id INTEGER NOT NULL PRIMARY KEY, codigo TEXT NOT NULL, nombre TEXT NOT NULL,
+ hectareas REAL NOT NULL, cultivo TEXT NOT NULL, valle TEXT NOT NULL,
+ campaniaCerrada INTEGER NOT NULL, dosisMaxima REAL NOT NULL
+);
+CREATE TABLE labor (
+ id INTEGER NOT NULL PRIMARY KEY, loteId INTEGER NOT NULL, tipo TEXT NOT NULL,
+ fecha TEXT NOT NULL, responsable TEXT NOT NULL, cantidad REAL NOT NULL,
+ observacion TEXT NOT NULL, pendiente INTEGER NOT NULL
+);
+-- Outbox durable: se conserva tras cerrar el proceso; la clave evita duplicar POST.
+CREATE TABLE cola (laborId INTEGER NOT NULL PRIMARY KEY, operacion TEXT NOT NULL, clave TEXT NOT NULL);
+CREATE TABLE meta (clave TEXT NOT NULL PRIMARY KEY, valor TEXT NOT NULL);
+observarLotes:
+SELECT * FROM lote WHERE (nombre LIKE ? OR codigo LIKE ?) AND (? = '' OR valle = ?) ORDER BY codigo;
+observarLaboresPorLote:
+SELECT * FROM labor WHERE loteId = ? ORDER BY fecha DESC, id DESC;
+siguienteIdLocal:
+SELECT COALESCE(MIN(id), 0) AS MIN FROM labor;
+guardarLote:
+INSERT OR REPLACE INTO lote VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+guardarLabor:
+INSERT OR REPLACE INTO labor VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+encolar:
+INSERT OR REPLACE INTO cola VALUES (?, ?, ?);
+pendientes:
+SELECT cola.laborId, cola.operacion, cola.clave FROM cola ORDER BY laborId;
+laborPorId:
+SELECT * FROM labor WHERE id = ?;
+eliminarLabor:
+DELETE FROM labor WHERE id = ?;
+desencolar:
+DELETE FROM cola WHERE laborId = ?;
+borrarCola:
+DELETE FROM cola;
+borrarLabores:
+DELETE FROM labor;
+borrarLotes:
+DELETE FROM lote;
+borrarMeta:
+DELETE FROM meta;
+guardarMeta:
+INSERT OR REPLACE INTO meta VALUES (?, ?);
+ultimaSync:
+SELECT valor FROM meta WHERE clave='ultimaSync';
+eliminarRemotasLote:
+DELETE FROM labor WHERE loteId = ? AND pendiente = 0;
