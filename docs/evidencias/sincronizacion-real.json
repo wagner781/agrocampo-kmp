@@ -1,0 +1,15 @@
+{
+  "verificacion": "Una unica fila definitiva para la ultima operacion instrumentada",
+  "filas": [
+    {
+      "id": 23,
+      "loteId": 1,
+      "tipo": "RIEGO",
+      "fecha": "2026-10-28",
+      "responsable": "tecnico1",
+      "cantidad": 2.0,
+      "observacion": "Prueba offline 1793210335069",
+      "pendiente": false
+    }
+  ]
+}

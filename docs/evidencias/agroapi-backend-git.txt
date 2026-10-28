@@ -1,5 +1,11 @@
-*   b7329a4 Merge pull request #7 from wagner781/develop
+*   2196cc8 Merge pull request #9 from wagner781/develop
 |\  
+| *   5c8edda Merge pull request #8 from wagner781/fix/gradlew-ejecutable
+| |\  
+| | * e47cd0b fix(build): permitir ejecutar el wrapper en Linux
+| |/  
+* | b7329a4 Merge pull request #7 from wagner781/develop
+|\| 
 | *   ab86a8a Merge pull request #6 from wagner781/feature/contrato-y-defensa
 | |\  
 | | * d805fff docs(api): explicar seguridad reglas y pruebas reproducibles

@@ -59,3 +59,13 @@ Pruebas comunes ejecutables: `./gradlew.bat :shared:jvmTest`.
 La prueba Android real necesita emulador limpio y AgroAPI en el puerto 8080:
 `./gradlew.bat :androidApp:connectedDebugAndroidTest`.
 
+## Evidencias verificadas
+
+[PDF con capturas reales, respuestas HTTP y grafo Git](docs/evidencias/AgroSierra-evidencias.pdf).
+La carpeta `docs/evidencias` incluye los PNG originales, resúmenes JUnit XML y
+JSON de las comprobaciones contra el servidor. `sincronizacion-real.json`
+confirma una única fila positiva para la última operación instrumentada.
+Los resultados son de una ejecución real y no sustituyen la defensa.
+El script `docs/generar_evidencias.py` vuelve a componer el PDF con reportlab y
+Pillow a partir de los informes/capturas existentes; no inventa resultados.
+

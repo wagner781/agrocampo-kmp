@@ -19,6 +19,10 @@ class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        androidx.core.view.WindowCompat.getInsetsController(window,window.decorView).apply {
+            isAppearanceLightStatusBars=true
+            isAppearanceLightNavigationBars=true
+        }
         setContent { AgroCampo(vm) }
     }
     override fun onStart() { super.onStart(); conectividad.registerDefaultNetworkCallback(callback); registrada=true }

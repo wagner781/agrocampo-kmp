@@ -32,6 +32,7 @@ class FlujoRealTest {
         ParcelFileDescriptor.AutoCloseInputStream(descriptor).bufferedReader().use { it.readText() }
     }
     @Test fun loginRegistroOfflineYSincronizacionReal() {
+        val observacion="Prueba offline ${System.currentTimeMillis()}"
         esperar("Iniciar sesion"); captura("01-login")
         compose.onNodeWithText("Usuario").performTextInput("tecnico1")
         compose.onNodeWithText("Contrasena").performTextInput("Agro2026*")
@@ -45,7 +46,7 @@ class FlujoRealTest {
             compose.onNodeWithText("Registrar labor").performClick()
             esperar("Cantidad aplicada")
             compose.onNodeWithText("Cantidad aplicada").performTextInput("2")
-            compose.onNodeWithText("Observacion").performTextInput("Evidencia offline instrumentada")
+            compose.onNodeWithText("Observacion").performTextInput(observacion)
             compose.onNodeWithText("Guardar labor").performScrollTo().performClick()
             esperar("Guardada sin conexion")
             captura("03-registro-offline")

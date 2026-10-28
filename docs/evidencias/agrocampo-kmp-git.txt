@@ -1,3 +1,4 @@
+* d9912fa test(android): comprobar registro en modo avion contra el servicio real
 * de1fb68 feat(presentacion): conectar pantallas Compose con ViewModel y Koin
 *   d0953d9 Merge pull request #5 from wagner781/feature/sesion-y-offline
 |\  
