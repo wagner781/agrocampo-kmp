@@ -1,8 +1,9 @@
+@file:OptIn(kotlin.time.ExperimentalTime::class)
 package pe.upeu.agrosierra.data.repository
 
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlin.random.Random
 import pe.upeu.agrosierra.data.local.*
 import pe.upeu.agrosierra.data.remote.AgroApi
@@ -43,6 +44,7 @@ class CampoRepositoryOffline(private val local: BaseLocal,private val api: AgroA
         permitir("CAMPANIA_CERRAR")
         if(local.q.pendientes().executeAsList().isNotEmpty()) throw ErrorApi.Conflicto("Sincronice las labores pendientes antes de cerrar")
         local.guardar(api.cerrar(loteId).dominio())
+        Unit
     }
     override suspend fun sincronizar(): ResumenSync = mutex.withLock {
         if(seguro.leer()==null) throw ErrorApi.NoAutorizado()
@@ -78,7 +80,7 @@ class CampoRepositoryOffline(private val local: BaseLocal,private val api: AgroA
     }
     private suspend fun descargar(): Int {
         val lotes=mutableListOf<Lote>(); var pagina=0
-        do { val p=api.lotes(pagina++); lotes.addAll(p.contenido.map { it.dominio() }); val ultima=p.ultima } while(!p.ultima)
+        do { val p=api.lotes(pagina++); lotes.addAll(p.contenido.map { it.dominio() }) } while(!p.ultima)
         val labores=mutableMapOf<Long,List<Labor>>()
         for(l in lotes) {
             val filas=mutableListOf<Labor>(); var n=0
@@ -100,3 +102,4 @@ class CampoRepositoryOffline(private val local: BaseLocal,private val api: AgroA
         return lotes.size+labores.values.sumOf { it.size }
     }
 }
+

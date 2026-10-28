@@ -1,7 +1,8 @@
+@file:OptIn(kotlin.time.ExperimentalTime::class)
 package pe.upeu.agrosierra.data.repository
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import pe.upeu.agrosierra.data.local.*
 import pe.upeu.agrosierra.data.remote.AgroApi
 import pe.upeu.agrosierra.domain.model.*
@@ -26,3 +27,4 @@ class SesionRepositoryImpl(private val api: AgroApi,private val seguro: AlmacenS
     }
     override fun salir() { seguro.borrar() }
 }
+
