@@ -22,12 +22,13 @@ class CampoRepositoryOffline(private val local: BaseLocal,private val api: AgroA
     }
     override suspend fun guardar(labor: Labor) = mutex.withLock {
         permitir(if(labor.id==0L) "LABOR_CREAR" else "LABOR_EDITAR")
-        local.db.transaction {
+        local.db.transactionWithResult {
             val id=if(labor.id==0L) local.siguienteId() else labor.id
             val l=labor.copy(id=id,pendiente=true)
             val anterior=local.q.pendientes().executeAsList().find { it.laborId==id }
             local.guardar(l)
             local.q.encolar(id,if(id<0) "POST" else "PUT",anterior?.clave ?: "${Clock.System.now().toEpochMilliseconds()}-${Random.nextLong()}")
+            l
         }
     }
     override suspend fun eliminar(id: Long) = mutex.withLock {
