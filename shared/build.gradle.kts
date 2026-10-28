@@ -33,6 +33,7 @@ kotlin {
             implementation("io.ktor:ktor-client-mock:3.3.0")
         }
         jvmTest.dependencies { implementation("app.cash.sqldelight:sqlite-driver:2.1.0") }
+        androidUnitTest.dependencies { implementation("app.cash.sqldelight:sqlite-driver:2.1.0") }
     }
 }
 android { namespace = "pe.upeu.agrosierra.shared"; compileSdk = 36
